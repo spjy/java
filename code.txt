@@ -1,0 +1,263 @@
+#include "header.h"
+
+void print_game_rules(void) {
+	printf("\nThe object of Yahtzee is to obtain the highest score from throwing 5 dice. The game consists of 13 rounds. In each round, you roll the dice and then score the roll in one of 13 categories. You must score once in each category. The score is determined by a different rule for each category. The game ends once all 13 categories have been scored. \n\n");
+}
+
+int roll_dice(void) {
+	return rand() % 6 + 1;
+}
+
+int play_game(int *pdice1, int *pdice2, int *pdice3, int *pdice4, int *pdice5) {
+	int sum_value = 0;
+	char yesno;
+	int roll = 0;
+	do {
+		printf("Enter any key to roll the 5 dice:  \n");
+		getch();
+		*pdice1 = roll_dice();
+		*pdice2 = roll_dice();
+		*pdice3 = roll_dice();
+		*pdice4 = roll_dice();
+		*pdice5 = roll_dice();
+		roll++;
+		printf("You rolled a %d %d %d %d %d \n", *pdice1, *pdice2, *pdice3, *pdice4, *pdice5);
+		if (roll < 3) {
+			printf("Do you want to use this combination for a game combination? Y for yes N for no\n");
+			scanf(" %c", &yesno);
+			if (yesno == 'Y') {
+				printf("What game combination would you like to chose? Enter the value corestponding to the choice. \n");
+				printf("1. Sum of 1's        7. Three-of-a-kind \n");
+				printf("2. Sum of 2's        8. Four-of-a-kind \n");
+				printf("3. Sum of 3's        9. Full house \n");
+				printf("4. Sum of 4's        10. Small straight \n");
+				printf("5. Sum of 5's        11. Large straight \n");
+				printf("6. Sum of 6's        12. Yahtzee \n");
+				printf("            13. Chance \n");
+				scanf("%d", &sum_value);
+				if (sum_value == 1) {
+					int total = 0;
+					 total = sum_of_one(*pdice1, *pdice2, *pdice3, *pdice4, *pdice5);
+				}
+				else if (sum_value == 2) {
+					int total = 0;
+					total = sum_of_two(*pdice1, *pdice2, *pdice3, *pdice4, *pdice5);
+				}
+				else if (sum_value == 3) {
+					int total = 0;
+					total = sum_of_three(*pdice1, *pdice2, *pdice3, *pdice4, *pdice5);
+				}
+				else if (sum_value == 4) {
+					int total = 0;
+					total = sum_of_four(*pdice1, *pdice2, *pdice3, *pdice4, *pdice5);
+				}
+				else if (sum_value == 5) {
+					int total = 0;
+					total = sum_of_five(*pdice1, *pdice2, *pdice3, *pdice4, *pdice5);
+				}
+				else if (sum_value == 6) {
+					int total = 0;
+					total = sum_of_six(*pdice1, *pdice2, *pdice3, *pdice4, *pdice5);
+				}
+				else if (sum_value == 7) {
+					int total = 0;
+					three_of_a_kind(*pdice1, *pdice2, *pdice3, *pdice4, *pdice5);
+				}
+				else if (sum_value == 8) {
+					int total = 0;
+					//four_of_a_kind(*pdice1, *pdice2, *pdice3, *pdice4, *pdice5);
+				}
+				else if (sum_value == 9) {
+					int total = 0;
+					//full_house(*pdice1, *pdice2, *pdice3, *pdice4, *pdice5);
+				}
+				else if (sum_value == 10) {
+					int total = 0;
+					//small_straight(*pdice1, *pdice2, *pdice3, *pdice4, *pdice5);
+				}
+				else if (sum_value == 11) {
+					int total = 0;
+					//large_straight(*pdice1, *pdice2, *pdice3, *pdice4, *pdice5);
+				}
+				else if (sum_value == 12) {
+					int total = 0;
+					//yahtzee(*pdice1, *pdice2, *pdice3, *pdice4, *pdice5);
+				}
+				else if (sum_value == 13) {
+					int total = 0;
+					//chance(*pdice1, *pdice2, *pdice3, *pdice4, *pdice5);
+				}
+			}
+		}
+	} while (roll < 3);
+	printf("You have rolled %d times \n", roll);
+}
+
+int	sum_of_one(int *pdice1, int *pdice2, int *pdice3, int *pdice4, int *pdice5) {
+	int count = 0;
+	int array[5];
+	printf("fuck this");
+	array[0] = *pdice1;
+	printf("fuck this");
+	array[1] = *pdice2;
+	printf("fuck this");
+	array[2] = *pdice3;
+	printf("fuck this");
+	array[3] = *pdice4;
+	printf("fuck this");
+	array[4] = *pdice5;
+	printf("fuck this");
+	for (int i = 0; i < 5; i++) {
+		if (array[i] == 1) {
+			count++;
+			}
+		}
+	return count;
+	}
+
+int	sum_of_two(int *pdice1, int *pdice2, int *pdice3, int *pdice4, int *pdice5) {
+	int count = 0;
+	int array[5] = { *pdice1, *pdice2, *pdice3, *pdice4, *pdice5 };
+	for (int i = 0; i < 5; i++) {
+		if (array[i] == 2) {
+			count = count + 2;
+		}
+	}
+	return count;
+}
+
+int	sum_of_three(int *pdice1, int *pdice2, int *pdice3, int *pdice4, int *pdice5) {
+	int count = 0;
+	int array[5] = { *pdice1, *pdice2, *pdice3, *pdice4, *pdice5 };
+	for (int i = 0; i < 5; i++) {
+		if (array[i] == 3) {
+			count = count + 3;
+		}
+	}
+	return count;
+}
+
+int	sum_of_four(int *pdice1, int *pdice2, int *pdice3, int *pdice4, int *pdice5) {
+	int count = 0;
+	int array[5] = { *pdice1, *pdice2, *pdice3, *pdice4, *pdice5 };
+	for (int i = 0; i < 5; i++) {
+		if (array[i] == 4) {
+			count = count + 4;
+		}
+	}
+	return count;
+}
+
+int	sum_of_five(int *pdice1, int *pdice2, int *pdice3, int *pdice4, int *pdice5) {
+	int count = 0;
+	int array[5] = { *pdice1, *pdice2, *pdice3, *pdice4, *pdice5 };
+	for (int i = 0; i < 5; i++) {
+		if (array[i] == 5) {
+			count = count + 5;
+		}
+	}
+	return count;
+}
+
+int	sum_of_six(int *pdice1, int *pdice2, int *pdice3, int *pdice4, int *pdice5) {
+	int count = 0;
+	int array[5] = { *pdice1, *pdice2, *pdice3, *pdice4, *pdice5 };
+	for (int i = 0; i < 5; i++) {
+		if (array[i] == 6) {
+			count = count + 6;
+		}
+	}
+	return count;
+}
+
+int three_of_a_kind(int *pdice1, int *pdice2, int *pdice3, int *pdice4, int *pdice5) {
+	int count = 1;
+	int array[5] = { *pdice1, *pdice2, *pdice3, *pdice4, *pdice5 };
+	bubble_sort(array, 5);
+	for (int i = 0; i < 5; i++) {
+		printf(array[i]);
+	}
+	if (count == 3) {
+		return *pdice1 + *pdice2 + *pdice3 + *pdice4 + *pdice5;
+	}
+}
+
+//int four_of_a_kind(int *pdice1, int *pdice2, int *pdice3, int *pdice4, int *pdice5) {
+//	int count = 0;
+//	int array[5] = { *pdice1, *pdice2, *pdice3, *pdice4, *pdice5 };
+//	for (int i = 0; i < 5; i++) {
+//		if (array[i] == 6) {
+//			count = count + 6;
+//		}
+//	}
+//	return count;
+//}
+//
+//int full_house(int *pdice1, int *pdice2, int *pdice3, int *pdice4, int *pdice5) {
+//	int count = 0;
+//	int array[5] = { *pdice1, *pdice2, *pdice3, *pdice4, *pdice5 };
+//	for (int i = 0; i < 5; i++) {
+//		if (array[i] == 6) {
+//			count = count + 6;
+//		}
+//	}
+//	return count;
+//}
+//
+//int small_straight(int *pdice1, int *pdice2, int *pdice3, int *pdice4, int *pdice5) {
+//	int count = 0;
+//	int array[5] = { *pdice1, *pdice2, *pdice3, *pdice4, *pdice5 };
+//	for (int i = 0; i < 5; i++) {
+//		if (array[i] == 6) {
+//			count++;
+//		}
+//	} 
+//}
+//
+//int large_straight(int *pdice1, int *pdice2, int *pdice3, int *pdice4, int *pdice5) {
+//	int count = 0;
+//	int array[5] = { *pdice1, *pdice2, *pdice3, *pdice4, *pdice5 };
+//	for (int i = 0; i < 5; i++) {
+//		if (array[i] == 6) {
+//			count = count + 6;
+//		}
+//	}
+//	return count;
+//}
+//
+//int yahtzee(int *pdice1, int *pdice2, int *pdice3, int *pdice4, int *pdice5) {
+//	int count = 0;
+//	int array[5] = { *pdice1, *pdice2, *pdice3, *pdice4, *pdice5 };
+//	for (int i = 0; i < 5; i++) {
+//		if (array[i] == 6) {
+//			count = count + 6;
+//		}
+//	}
+//	return count;
+//}
+//
+//int chance(int *pdice1, int *pdice2, int *pdice3, int *pdice4, int *pdice5) {
+//	int count = 0;
+//	int array[5] = { *pdice1, *pdice2, *pdice3, *pdice4, *pdice5 };
+//	for (int i = 0; i < 5; i++) {
+//		if (array[i] == 6) {
+//			count = count + 6;
+//		}
+//	}
+//	return count;
+//}
+
+void bubble_sort(int list[], int n) {
+	int c = 0;
+	int d = 0;
+	int t = 0;
+	for (c = 0; c < (n - 1); c++) {
+		for (d = 0; d < n - c - 1; d++) {
+			if (list[d] > list[d + 1]) {
+				t = list[d];
+				list[d] = list[d + 1];
+				list[d + 1] = t;
+			}
+		}
+	}
+}
